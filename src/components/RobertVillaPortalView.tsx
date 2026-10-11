@@ -3,7 +3,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import RobertVillaBio from '@/components/RobertVillaBio';
+import RobertVillaHeroCarousel from '@/components/RobertVillaHeroCarousel';
 import RobertVillaVehicleGrid from '@/components/RobertVillaVehicleGrid';
 import RobertVillaTestimonials from '@/components/RobertVillaTestimonials';
 import RobertVillaContactForm from '@/components/RobertVillaContactForm';
@@ -26,8 +26,8 @@ export default function RobertVillaPortalView() {
           </span>
         </div>
 
-        {/* 1. Welcoming Hero & Bio Section with Headshot Placeholder & Share Tool */}
-        <RobertVillaBio />
+        {/* 1. Hero Section with Auto-Sliding Carousel of robert-hero1, 2, 3 & Requested Headlines */}
+        <RobertVillaHeroCarousel />
 
         {/* 2. Grid of Available Car Units with Placeholders & Computations */}
         <RobertVillaVehicleGrid onSelectUnit={(unitName) => setSelectedUnit(unitName)} />
