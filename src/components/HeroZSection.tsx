@@ -1,118 +1,224 @@
 // FILE: src/components/HeroZSection.tsx
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowRight, ShieldCheck, Zap, Sparkles, CheckCircle2, Car, Phone } from 'lucide-react';
-import AspectImage from '@/components/AspectImage';
-import { ASSET_IMAGES } from '@/lib/vehiclesData';
+import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, CheckCircle2, Car, Phone, ShieldCheck } from 'lucide-react';
+import { HERO_CAROUSEL_SLIDES, HeroSlide } from '@/lib/vehiclesData';
+
+const SLIDE_DURATION = 5000; // 5 seconds per slide auto-transition
+
+function CarouselBackgroundSlide({
+  slide,
+  isActive,
+  isPriority,
+}: {
+  slide: HeroSlide;
+  isActive: boolean;
+  isPriority: boolean;
+}) {
+  const [imgSrc, setImgSrc] = useState(slide.image);
+
+  return (
+    <div
+      className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+        isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+      }`}
+    >
+      <img
+        src={imgSrc}
+        alt={slide.title}
+        loading={isPriority ? 'eager' : 'lazy'}
+        onError={() => {
+          // If local file fails or is 0-bytes, smoothly fallback to high-res placeholder
+          if (imgSrc !== slide.fallbackImage) {
+            setImgSrc(slide.fallbackImage);
+          }
+        }}
+        className={`w-full h-full object-cover object-center transform transition-transform duration-[6000ms] ease-out ${
+          isActive ? 'scale-105' : 'scale-100'
+        }`}
+      />
+    </div>
+  );
+}
 
 export default function HeroZSection() {
-  return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-neutral-900 via-neutral-900 to-neutral-950 text-white py-16 lg:py-24">
-      {/* Decorative background grid and glow */}
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ED0000_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-red-600/15 rounded-full blur-3xl pointer-events-none" />
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slideCount = HERO_CAROUSEL_SLIDES.length;
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-        {/* Z-Pattern Diagnostic Badge */}
-        <div className="flex items-center gap-2 mb-6">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-red-600/20 text-red-400 border border-red-500/30">
-            <Sparkles className="w-3.5 h-3.5" />
-            Official Albay Bicol Branch Showcase
-          </span>
-          <span className="text-xs text-neutral-400 hidden sm:inline">
-            • Experience Legendary Japanese Reliability in Bicolandia
-          </span>
+  // Unconditional auto-transition timer: advances every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slideCount);
+    }, SLIDE_DURATION);
+
+    return () => clearInterval(timer);
+  }, [slideCount]);
+
+  const handlePrev = () => {
+    setCurrentSlide((prev) => (prev - 1 + slideCount) % slideCount);
+  };
+
+  const handleNext = () => {
+    setCurrentSlide((prev) => (prev + 1) % slideCount);
+  };
+
+  const activeSlideData = HERO_CAROUSEL_SLIDES[currentSlide];
+
+  return (
+    <section
+      className="relative min-h-[640px] sm:min-h-[700px] lg:min-h-[760px] flex items-center overflow-hidden bg-neutral-950 text-white"
+      aria-label="Mitsubishi Motors Albay Hero Showcase"
+    >
+      {/* ============================================================== */}
+      {/* 1. AUTO-TRANSITION BACKGROUND CAROUSEL (IMAGES FULLY VISIBLE)  */}
+      {/* ============================================================== */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {HERO_CAROUSEL_SLIDES.map((slide, index) => (
+          <CarouselBackgroundSlide
+            key={slide.id}
+            slide={slide}
+            isActive={index === currentSlide}
+            isPriority={index === 0}
+          />
+        ))}
+
+        {/* Soft, Transparent Scrim: Vehicles remain vibrant and clearly visible across the screen */}
+        <div className="absolute inset-0 z-20 bg-gradient-to-t from-neutral-950/90 via-transparent to-black/40 pointer-events-none" />
+        <div className="absolute inset-0 z-20 bg-gradient-to-r from-black/70 via-black/30 to-transparent pointer-events-none" />
+      </div>
+
+      {/* ============================================================== */}
+      {/* 2. FOREGROUND CONTENT: FROSTED GLASS PANEL FOR 100% CONTRAST  */}
+      {/* ============================================================== */}
+      <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 py-16 lg:py-24 w-full">
+        {/* Luxury Glassmorphism Container: Leaves the rest of the car clearly visible */}
+        <div className="max-w-2xl bg-black/55 backdrop-blur-md p-6 sm:p-9 lg:p-10 rounded-3xl border border-white/15 shadow-2xl space-y-6">
+          {/* Tag & Dealership Badge */}
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-red-600/40 text-red-300 border border-red-500/50">
+              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+              {activeSlideData.tag}
+            </span>
+            <span className="text-xs text-neutral-300 hidden sm:inline-flex items-center gap-1.5">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              Official Albay Showroom
+            </span>
+          </div>
+
+          {/* Main Headline */}
+          <div key={`headline-${currentSlide}`} className="animate-[fadeIn_500ms_ease-in-out]">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+              {activeSlideData.title}
+            </h1>
+          </div>
+
+          {/* Subheadline */}
+          <div key={`subheadline-${currentSlide}`} className="animate-[fadeIn_600ms_ease-in-out]">
+            <p className="text-xs sm:text-sm md:text-base text-neutral-200 leading-relaxed font-light">
+              {activeSlideData.subtitle}
+            </p>
+          </div>
+
+          {/* Value Highlights Pill Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1 text-xs text-neutral-200">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0" />
+              <span>Lowest All-in Downpayment Deals</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0" />
+              <span>Fast 24-48 Hr Bank Approval</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0" />
+              <span>Albay 3S Showroom & Service Facility</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0" />
+              <span>Free 1-Yr Insurance & 3-Yr LTO</span>
+            </div>
+          </div>
+
+          {/* Call-to-Action Action Buttons */}
+          <div className="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link
+              href="#vehicles"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-red-600 text-white font-semibold text-sm hover:bg-red-700 active:bg-red-800 transition-all shadow-lg shadow-red-600/40 group"
+            >
+              <Car className="w-4 h-4 text-white" />
+              <span>Explore 2026 Vehicle Lineup</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+
+            <a
+              href="tel:+63527428888"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm border border-white/20 backdrop-blur-md transition-all"
+            >
+              <Phone className="w-4 h-4 text-red-400" />
+              <span>Call: (052) 742-8888</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* ============================================================== */}
+      {/* 3. CAROUSEL AUTO-TRANSITION CONTROLS & TIMED PROGRESS PILLS   */}
+      {/* ============================================================== */}
+      <div className="absolute bottom-6 left-0 right-0 z-30 max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        {/* Slide Indicator Dots (1, 2, 3) with Live 5s Progress Bar */}
+        <div className="flex items-center gap-2">
+          {HERO_CAROUSEL_SLIDES.map((slide, idx) => {
+            const isCurrent = idx === currentSlide;
+            return (
+              <button
+                key={slide.id}
+                type="button"
+                onClick={() => setCurrentSlide(idx)}
+                className={`relative overflow-hidden transition-all duration-300 rounded-full flex items-center justify-center min-h-[38px] ${
+                  isCurrent
+                    ? 'bg-neutral-900 border border-red-500 text-white px-4 py-1.5 text-xs font-bold shadow-xl'
+                    : 'bg-black/50 hover:bg-black/70 text-neutral-300 border border-white/10 px-3 py-1.5 text-xs font-medium backdrop-blur-md'
+                }`}
+                aria-label={`Jump to slide ${idx + 1}: ${slide.highlightUnit}`}
+              >
+                {/* Visual live progress bar filling across 5000ms */}
+                {isCurrent && (
+                  <span
+                    key={`progress-fill-${currentSlide}`}
+                    className="absolute inset-0 bg-red-600/90 -z-10 origin-left animate-[progressFill_5000ms_linear_forwards]"
+                  />
+                )}
+                <span className="relative z-10">0{idx + 1}</span>
+                {isCurrent && (
+                  <span className="relative z-10 ml-2 hidden sm:inline text-[11px] font-normal text-white">
+                    • {slide.highlightUnit}
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </div>
 
-        {/* Z-Pattern Main Diagonal Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          {/* Top-Left to Mid Diagonal: Headlines and Value Proposition */}
-          <div className="lg:col-span-7 space-y-6">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-[1.15]">
-              Drive Your Ambition Across{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-600 to-rose-400">
-                Albay & Bicolandia
-              </span>
-            </h1>
-
-            <p className="text-base sm:text-lg text-neutral-300 leading-relaxed font-light">
-              Welcome to the authorized Mitsubishi Albay showroom. From rugged climbs around Mt. Mayon to sleek city drives in Legazpi, find exclusive low downpayment promos, 24-hour bank approvals, and authentic dealership service.
-            </p>
-
-            {/* Quick Benefits Bullet Points */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              <div className="flex items-center gap-2.5 text-sm text-neutral-200">
-                <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0" />
-                <span>Lowest All-in Downpayment Deals</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-sm text-neutral-200">
-                <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0" />
-                <span>Fast Bank Approval Assistance</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-sm text-neutral-200">
-                <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0" />
-                <span>Top-Rated Dealership Service</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-sm text-neutral-200">
-                <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0" />
-                <span>Official Warranty & Genuine Parts</span>
-              </div>
-            </div>
-
-            {/* Z-Pattern Diagonal Path to Primary Action */}
-            <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-              <Link
-                href="#vehicles"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-red-600 text-white font-semibold text-base hover:bg-red-700 active:bg-red-800 transition-all shadow-lg shadow-red-600/30 group"
-              >
-                <Car className="w-5 h-5 text-white" />
-                <span>Explore 2026 Vehicle Lineup</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <a
-                href="tel:+63527428888"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-white font-medium text-base border border-neutral-700 transition-colors"
-              >
-                <Phone className="w-4 h-4 text-red-400" />
-                <span>Call Showroom: (052) 742-8888</span>
-              </a>
-            </div>
-          </div>
-
-          {/* Top-Right visual anchor in Z-Pattern: Responsive Image Placeholder Container */}
-          <div className="lg:col-span-5">
-            <div className="relative rounded-2xl overflow-hidden border border-neutral-700 bg-neutral-800 shadow-2xl group">
-              <AspectImage
-                src={ASSET_IMAGES.showroomHero}
-                alt="Mitsubishi Albay Showroom Hero Banner"
-                aspectClass="aspect-[16/10] sm:aspect-[4/3]"
-                objectFit="cover"
-                priority={true}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-              
-              {/* Floating badge inside hero placeholder */}
-              <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-xl bg-black/80 backdrop-blur-md border border-white/10 flex items-center justify-between">
-                <div>
-                  <p className="text-xs uppercase tracking-wider text-red-400 font-bold">Featured Lineup</p>
-                  <p className="text-sm font-semibold text-white">Mitsubishi Motors Albay Showroom</p>
-                </div>
-                <span className="text-xs font-bold bg-red-600 px-2.5 py-1 rounded-lg text-white">
-                  2026 Promos
-                </span>
-              </div>
-            </div>
-
-            {/* Branch accreditation pill */}
-            <div className="mt-4 flex items-center justify-between px-3 text-xs text-neutral-400">
-              <span className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" /> Authorized Dealer
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Zap className="w-4 h-4 text-amber-400" /> Fast Release Available
-              </span>
-            </div>
-          </div>
+        {/* Carousel Prev / Next Arrow Controls */}
+        <div className="flex items-center gap-2 self-end sm:self-auto">
+          <button
+            type="button"
+            onClick={handlePrev}
+            className="w-11 h-11 rounded-xl bg-black/60 hover:bg-black/90 text-white border border-white/20 backdrop-blur-md flex items-center justify-center transition-all active:scale-95"
+            aria-label="Previous Hero Slide"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            type="button"
+            onClick={handleNext}
+            className="w-11 h-11 rounded-xl bg-black/60 hover:bg-black/90 text-white border border-white/20 backdrop-blur-md flex items-center justify-center transition-all active:scale-95"
+            aria-label="Next Hero Slide"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
         </div>
       </div>
     </section>

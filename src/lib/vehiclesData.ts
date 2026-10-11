@@ -159,6 +159,49 @@ export const ALBAY_VEHICLES: VehicleUnit[] = [
 /**
  * Dealership & Agent Static Image Assets
  */
+export interface HeroSlide {
+  id: string;
+  image: string; // <-- SWAP YOUR 3 IMAGES HERE
+  fallbackImage: string;
+  title: string;
+  subtitle: string;
+  tag: string;
+  highlightUnit: string;
+}
+
+export const HERO_CAROUSEL_SLIDES: HeroSlide[] = [
+  {
+    id: 'slide-1',
+    // 📸 IMAGE 1: Local file in /public/hero1.jpg
+    image: '/hero1.jpg',
+    fallbackImage: 'https://placehold.co/1920x1080/18181b/ffffff?text=Hero+Image+1+-+Mitsubishi+Albay+Showroom',
+    title: 'Drive Your Ambition Across Albay & Bicolandia',
+    subtitle: 'Welcome to the authorized Mitsubishi Albay showroom. Discover exclusive low downpayment promos, 24-hour fast bank approvals, and authentic Japanese reliability.',
+    tag: 'Official Authorized Dealership • Bicol Region',
+    highlightUnit: 'All-New 2026 Model Lineup',
+  },
+  {
+    id: 'slide-2',
+    // 📸 IMAGE 2: Local file in /public/hero2.jpg
+    image: '/hero2.jpg',
+    fallbackImage: 'https://placehold.co/1920x1080/18181b/ffffff?text=Hero+Image+2+-+Montero+Sport+Black+Series',
+    title: 'Command Every Road in the Montero Sport',
+    subtitle: 'Refined 7-seater midsize luxury SUV powered by 2.4L MIVEC Clean Diesel with all-in downpayment bundles starting from only ₱98,000.',
+    tag: 'Best-Selling 7-Seater Midsize SUV',
+    highlightUnit: 'Montero Sport Black Series',
+  },
+  {
+    id: 'slide-3',
+    // 📸 IMAGE 3: Local file in /public/hero3.jpg
+    image: '/hero3.jpg',
+    fallbackImage: 'https://placehold.co/1920x1080/18181b/ffffff?text=Hero+Image+3+-+All-New+Triton+Athlete+4x4',
+    title: 'Unmatched 4x4 Rally Power Built for Bicol Terrain',
+    subtitle: 'Conquer the rugged slopes around Mt. Mayon and provincial highways with 204PS Bi-Turbo torque and Super Select 4WD-II engineering.',
+    tag: 'Rally-Bred Performance • 204 PS',
+    highlightUnit: 'All-New Triton Athlete 4x4',
+  },
+];
+
 export const ASSET_IMAGES = {
   // Main Showroom Hero Banner
   showroomHero: 'https://placehold.co/1200x700/18181b/ffffff?text=Mitsubishi+Albay+Showroom+Hero+Banner',
