@@ -1,0 +1,7 @@
+{
+  "name": "Mitsubishi Albay Bicol Branch",
+  "description": "Official showcase and top sales consultant portal for Mitsubishi Motors Albay, Bicol Branch.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
