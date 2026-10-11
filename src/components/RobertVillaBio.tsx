@@ -3,6 +3,8 @@
 
 import React, { useState } from 'react';
 import { Award, Star, ShieldCheck, CheckCircle2, Phone, Mail, MessageCircle, Share2, Check, Sparkles } from 'lucide-react';
+import AspectImage from '@/components/AspectImage';
+import { ASSET_IMAGES } from '@/lib/vehiclesData';
 
 export default function RobertVillaBio() {
   const [copied, setCopied] = useState(false);
@@ -50,16 +52,20 @@ export default function RobertVillaBio() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
-        {/* Professional Headshot Placeholder */}
+        {/* Professional Headshot Container - Aspect Ratio Guard */}
         <div className="lg:col-span-5 flex flex-col items-center">
-          <div className="relative group w-full max-w-sm">
+          <div className="relative group w-full max-w-[280px] sm:max-w-[320px]">
             <div className="relative aspect-square w-full rounded-2xl overflow-hidden border-4 border-red-600 shadow-2xl bg-neutral-800">
-              <img
-                src="https://placehold.co/600x600/18181b/ffffff?text=Robert+Villa+Professional+Headshot"
-                alt="Robert Villa Professional Headshot Placeholder"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              <AspectImage
+                src={ASSET_IMAGES.robertVillaHeadshot}
+                alt="Robert Villa Professional Headshot"
+                aspectClass="aspect-square"
+                objectFit="cover"
+                objectPosition="object-top"
+                priority={true}
+                imgClassName="group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 pointer-events-none" />
             </div>
 
             {/* Badges on Headshot */}
@@ -75,7 +81,7 @@ export default function RobertVillaBio() {
           </div>
 
           {/* Quick Direct Connect Buttons */}
-          <div className="w-full max-w-sm mt-8 flex flex-col gap-2">
+          <div className="w-full max-w-[280px] sm:max-w-[320px] mt-8 flex flex-col gap-2">
             <a
               href="tel:+639175554321"
               className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold text-sm transition-colors shadow-md"

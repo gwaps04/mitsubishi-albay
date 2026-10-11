@@ -1,7 +1,9 @@
 // FILE: src/components/HeroZSection.tsx
 import React from 'react';
 import Link from 'next/link';
-import { Award, ArrowRight, ShieldCheck, Zap, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Zap, Sparkles, CheckCircle2, Car, Phone } from 'lucide-react';
+import AspectImage from '@/components/AspectImage';
+import { ASSET_IMAGES } from '@/lib/vehiclesData';
 
 export default function HeroZSection() {
   return (
@@ -34,7 +36,7 @@ export default function HeroZSection() {
             </h1>
 
             <p className="text-base sm:text-lg text-neutral-300 leading-relaxed font-light">
-              Welcome to the authorized Mitsubishi Albay showroom. From rugged climbs around Mt. Mayon to sleek city drives in Legazpi, find exclusive low downpayment promos, 24-hour bank approvals, and personalized care from our certified team.
+              Welcome to the authorized Mitsubishi Albay showroom. From rugged climbs around Mt. Mayon to sleek city drives in Legazpi, find exclusive low downpayment promos, 24-hour bank approvals, and authentic dealership service.
             </p>
 
             {/* Quick Benefits Bullet Points */}
@@ -60,44 +62,44 @@ export default function HeroZSection() {
             {/* Z-Pattern Diagonal Path to Primary Action */}
             <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <Link
-                href="/robert-villa"
+                href="#vehicles"
                 className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-red-600 text-white font-semibold text-base hover:bg-red-700 active:bg-red-800 transition-all shadow-lg shadow-red-600/30 group"
               >
-                <Award className="w-5 h-5 text-amber-300" />
-                <span>Meet Robert Villa (Top 1 Agent)</span>
+                <Car className="w-5 h-5 text-white" />
+                <span>Explore 2026 Vehicle Lineup</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link
-                href="#vehicles"
+              <a
+                href="tel:+63527428888"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-white font-medium text-base border border-neutral-700 transition-colors"
               >
-                <span>View 2026 Vehicle Lineup</span>
-              </Link>
+                <Phone className="w-4 h-4 text-red-400" />
+                <span>Call Showroom: (052) 742-8888</span>
+              </a>
             </div>
           </div>
 
-          {/* Top-Right visual anchor in Z-Pattern: Distinct Hero Image Placeholder */}
+          {/* Top-Right visual anchor in Z-Pattern: Responsive Image Placeholder Container */}
           <div className="lg:col-span-5">
             <div className="relative rounded-2xl overflow-hidden border border-neutral-700 bg-neutral-800 shadow-2xl group">
-              <div className="relative aspect-[4/3] w-full bg-neutral-900">
-                {/* Visual image placeholder tag */}
-                <img
-                  src="https://placehold.co/800x600/18181b/ffffff?text=Mitsubishi+Albay+Showroom+Hero+Banner"
-                  alt="Mitsubishi Albay Showroom Hero Banner Placeholder"
-                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                
-                {/* Floating badge inside hero placeholder */}
-                <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-xl bg-black/80 backdrop-blur-md border border-white/10 flex items-center justify-between">
-                  <div>
-                    <p className="text-xs uppercase tracking-wider text-red-400 font-bold">Featured Unit</p>
-                    <p className="text-sm font-semibold text-white">Mitsubishi Montero Sport 2026</p>
-                  </div>
-                  <span className="text-xs font-bold bg-red-600 px-2.5 py-1 rounded-lg text-white">
-                    Low DP Promo
-                  </span>
+              <AspectImage
+                src={ASSET_IMAGES.showroomHero}
+                alt="Mitsubishi Albay Showroom Hero Banner"
+                aspectClass="aspect-[16/10] sm:aspect-[4/3]"
+                objectFit="cover"
+                priority={true}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+              
+              {/* Floating badge inside hero placeholder */}
+              <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-xl bg-black/80 backdrop-blur-md border border-white/10 flex items-center justify-between">
+                <div>
+                  <p className="text-xs uppercase tracking-wider text-red-400 font-bold">Featured Lineup</p>
+                  <p className="text-sm font-semibold text-white">Mitsubishi Motors Albay Showroom</p>
                 </div>
+                <span className="text-xs font-bold bg-red-600 px-2.5 py-1 rounded-lg text-white">
+                  2026 Promos
+                </span>
               </div>
             </div>
 

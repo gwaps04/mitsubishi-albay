@@ -62,12 +62,6 @@ export default function MitsubishiFooter() {
                   Branch Location & Facilities
                 </Link>
               </li>
-              <li className="pt-1">
-                <Link href="/robert-villa" className="text-neutral-300 hover:text-red-400 transition-colors flex items-center gap-1.5">
-                  <Award className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Robert Villa Personal Portal</span>
-                </Link>
-              </li>
             </ul>
           </div>
 

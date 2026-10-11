@@ -1,7 +1,8 @@
 // FILE: src/components/BranchLocationSection.tsx
 import React from 'react';
-import Link from 'next/link';
-import { MapPin, Phone, ShieldCheck, Wrench, Calendar, Sparkles } from 'lucide-react';
+import { MapPin, Phone, ShieldCheck, Wrench, Calendar } from 'lucide-react';
+import AspectImage from '@/components/AspectImage';
+import { ASSET_IMAGES } from '@/lib/vehiclesData';
 
 export default function BranchLocationSection() {
   return (
@@ -56,26 +57,25 @@ export default function BranchLocationSection() {
                   <Phone className="w-4 h-4" />
                   <span>Call Dealership: (052) 742-8888</span>
                 </a>
-                <Link
-                  href="/robert-villa#inquiry"
+                <a
+                  href="tel:+639175554321"
                   className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-neutral-200 font-medium text-sm border border-neutral-700 transition-colors"
                 >
                   <Calendar className="w-4 h-4 text-red-400" />
-                  <span>Schedule Test Drive</span>
-                </Link>
+                  <span>Direct Mobile: 0917 555 4321</span>
+                </a>
               </div>
             </div>
 
-            {/* Right Image Placeholder */}
+            {/* Right Image Container with Responsive Aspect Ratio */}
             <div className="lg:col-span-5">
               <div className="relative rounded-2xl overflow-hidden border border-neutral-700 bg-neutral-800 shadow-xl">
-                <div className="aspect-[4/3] w-full">
-                  <img
-                    src="https://placehold.co/800x600/18181b/ffffff?text=Mitsubishi+Albay+Dealership+and+Showroom"
-                    alt="Mitsubishi Albay Dealership and Showroom Placeholder"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <AspectImage
+                  src={ASSET_IMAGES.dealershipLocation}
+                  alt="Mitsubishi Albay Showroom & Service Facility"
+                  aspectClass="aspect-[16/10] sm:aspect-[4/3]"
+                  objectFit="cover"
+                />
                 <div className="p-4 bg-neutral-950/90 border-t border-neutral-800 text-xs text-neutral-300">
                   <p className="font-semibold text-white">Mitsubishi Albay Showroom & Service Center</p>
                   <p className="text-neutral-400 mt-0.5">Maharlika Highway, Daraga / Legazpi, Albay, Bicol 4501</p>
