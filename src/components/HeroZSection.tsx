@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, CheckCircle2, Car, Phone, ShieldCheck } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, Car, Phone, ShieldCheck } from 'lucide-react';
 import { HERO_CAROUSEL_SLIDES, HeroSlide } from '@/lib/vehiclesData';
 
 const SLIDE_DURATION = 5000; // 5 seconds per slide auto-transition
@@ -30,7 +30,6 @@ function CarouselBackgroundSlide({
         alt={slide.title}
         loading={isPriority ? 'eager' : 'lazy'}
         onError={() => {
-          // If local file fails or is 0-bytes, smoothly fallback to high-res placeholder
           if (imgSrc !== slide.fallbackImage) {
             setImgSrc(slide.fallbackImage);
           }
@@ -68,11 +67,11 @@ export default function HeroZSection() {
 
   return (
     <section
-      className="relative min-h-[640px] sm:min-h-[700px] lg:min-h-[760px] flex items-center overflow-hidden bg-neutral-950 text-white"
+      className="relative min-h-[580px] sm:min-h-[640px] lg:min-h-[700px] flex items-end pb-20 sm:pb-24 lg:pb-24 overflow-hidden bg-neutral-950 text-white"
       aria-label="Mitsubishi Motors Albay Hero Showcase"
     >
       {/* ============================================================== */}
-      {/* 1. AUTO-TRANSITION BACKGROUND CAROUSEL (IMAGES FULLY VISIBLE)  */}
+      {/* 1. AUTO-TRANSITION BACKGROUND CAROUSEL (UNTOUCHED)             */}
       {/* ============================================================== */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {HERO_CAROUSEL_SLIDES.map((slide, index) => (
@@ -84,91 +83,70 @@ export default function HeroZSection() {
           />
         ))}
 
-        {/* Soft, Transparent Scrim: Vehicles remain vibrant and clearly visible across the screen */}
-        <div className="absolute inset-0 z-20 bg-gradient-to-t from-neutral-950/90 via-transparent to-black/40 pointer-events-none" />
-        <div className="absolute inset-0 z-20 bg-gradient-to-r from-black/70 via-black/30 to-transparent pointer-events-none" />
+        {/* Minimal Non-Intrusive Gradient: Light vignette so the car is 100% visible and unblocked */}
+        <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/90 via-black/25 to-black/30 pointer-events-none" />
+        <div className="absolute inset-0 z-20 bg-gradient-to-r from-black/60 via-transparent to-transparent pointer-events-none" />
       </div>
 
       {/* ============================================================== */}
-      {/* 2. FOREGROUND CONTENT: FROSTED GLASS PANEL FOR 100% CONTRAST  */}
+      {/* 2. AIRY CINEMATIC FLOATING TEXT (NO BULKY CARD BLOCKING CARS)   */}
       {/* ============================================================== */}
-      <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 py-16 lg:py-24 w-full">
-        {/* Luxury Glassmorphism Container: Leaves the rest of the car clearly visible */}
-        <div className="max-w-2xl bg-black/55 backdrop-blur-md p-6 sm:p-9 lg:p-10 rounded-3xl border border-white/15 shadow-2xl space-y-6">
-          {/* Tag & Dealership Badge */}
+      <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 w-full">
+        <div className="max-w-2xl space-y-4">
+          {/* Tag & Dealership Badge with Soft Backdrop Pill */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-red-600/40 text-red-300 border border-red-500/50">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-black/60 backdrop-blur-md text-red-400 border border-white/20 shadow-lg">
               <Sparkles className="w-3.5 h-3.5 text-amber-300" />
               {activeSlideData.tag}
             </span>
-            <span className="text-xs text-neutral-300 hidden sm:inline-flex items-center gap-1.5">
+            <span className="text-xs text-neutral-200 hidden sm:inline-flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
               Official Albay Showroom
             </span>
           </div>
 
-          {/* Main Headline */}
+          {/* Headline with High-Contrast Text Shadow (Never blocks the vehicle) */}
           <div key={`headline-${currentSlide}`} className="animate-[fadeIn_500ms_ease-in-out]">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-[1.15] drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
               {activeSlideData.title}
             </h1>
           </div>
 
-          {/* Subheadline */}
+          {/* Subheadline with Light Text Shadow */}
           <div key={`subheadline-${currentSlide}`} className="animate-[fadeIn_600ms_ease-in-out]">
-            <p className="text-xs sm:text-sm md:text-base text-neutral-200 leading-relaxed font-light">
+            <p className="text-sm sm:text-base text-neutral-100 font-normal leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] max-w-xl">
               {activeSlideData.subtitle}
             </p>
           </div>
 
-          {/* Value Highlights Pill Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1 text-xs text-neutral-200">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0" />
-              <span>Lowest All-in Downpayment Deals</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0" />
-              <span>Fast 24-48 Hr Bank Approval</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0" />
-              <span>Albay 3S Showroom & Service Facility</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0" />
-              <span>Free 1-Yr Insurance & 3-Yr LTO</span>
-            </div>
-          </div>
-
-          {/* Call-to-Action Action Buttons */}
-          <div className="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          {/* Sleek, Compact Floating Buttons */}
+          <div className="pt-2 flex flex-wrap items-center gap-3">
             <Link
               href="#vehicles"
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-red-600 text-white font-semibold text-sm hover:bg-red-700 active:bg-red-800 transition-all shadow-lg shadow-red-600/40 group"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-semibold text-xs sm:text-sm transition-all shadow-xl shadow-black/50 group"
             >
               <Car className="w-4 h-4 text-white" />
-              <span>Explore 2026 Vehicle Lineup</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <span>Explore 2026 Lineup</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </Link>
 
             <a
               href="tel:+63527428888"
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm border border-white/20 backdrop-blur-md transition-all"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-black/60 hover:bg-black/80 text-white font-medium text-xs sm:text-sm border border-white/30 backdrop-blur-md shadow-xl transition-all"
             >
-              <Phone className="w-4 h-4 text-red-400" />
-              <span>Call: (052) 742-8888</span>
+              <Phone className="w-3.5 h-3.5 text-red-400" />
+              <span>Call Showroom: (052) 742-8888</span>
             </a>
           </div>
         </div>
       </div>
 
       {/* ============================================================== */}
-      {/* 3. CAROUSEL AUTO-TRANSITION CONTROLS & TIMED PROGRESS PILLS   */}
+      {/* 3. MINIMALIST SLIDE INDICATORS (PINNED TO BOTTOM RIGHT)        */}
       {/* ============================================================== */}
-      <div className="absolute bottom-6 left-0 right-0 z-30 max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        {/* Slide Indicator Dots (1, 2, 3) with Live 5s Progress Bar */}
-        <div className="flex items-center gap-2">
+      <div className="absolute bottom-5 right-4 sm:right-6 z-30 flex items-center gap-2">
+        {/* Slide Indicator Dots (1, 2, 3) */}
+        <div className="flex items-center gap-1.5">
           {HERO_CAROUSEL_SLIDES.map((slide, idx) => {
             const isCurrent = idx === currentSlide;
             return (
@@ -176,14 +154,13 @@ export default function HeroZSection() {
                 key={slide.id}
                 type="button"
                 onClick={() => setCurrentSlide(idx)}
-                className={`relative overflow-hidden transition-all duration-300 rounded-full flex items-center justify-center min-h-[38px] ${
+                className={`relative overflow-hidden transition-all duration-300 rounded-full flex items-center justify-center h-8 ${
                   isCurrent
-                    ? 'bg-neutral-900 border border-red-500 text-white px-4 py-1.5 text-xs font-bold shadow-xl'
-                    : 'bg-black/50 hover:bg-black/70 text-neutral-300 border border-white/10 px-3 py-1.5 text-xs font-medium backdrop-blur-md'
+                    ? 'bg-neutral-900 border border-red-500 text-white px-3 text-[11px] font-bold shadow-lg'
+                    : 'bg-black/60 hover:bg-black/80 text-neutral-300 border border-white/20 px-2.5 text-[11px] font-medium backdrop-blur-md'
                 }`}
-                aria-label={`Jump to slide ${idx + 1}: ${slide.highlightUnit}`}
+                aria-label={`Jump to slide ${idx + 1}`}
               >
-                {/* Visual live progress bar filling across 5000ms */}
                 {isCurrent && (
                   <span
                     key={`progress-fill-${currentSlide}`}
@@ -191,33 +168,28 @@ export default function HeroZSection() {
                   />
                 )}
                 <span className="relative z-10">0{idx + 1}</span>
-                {isCurrent && (
-                  <span className="relative z-10 ml-2 hidden sm:inline text-[11px] font-normal text-white">
-                    • {slide.highlightUnit}
-                  </span>
-                )}
               </button>
             );
           })}
         </div>
 
         {/* Carousel Prev / Next Arrow Controls */}
-        <div className="flex items-center gap-2 self-end sm:self-auto">
+        <div className="flex items-center gap-1.5 ml-1">
           <button
             type="button"
             onClick={handlePrev}
-            className="w-11 h-11 rounded-xl bg-black/60 hover:bg-black/90 text-white border border-white/20 backdrop-blur-md flex items-center justify-center transition-all active:scale-95"
+            className="w-8 h-8 rounded-lg bg-black/60 hover:bg-black/90 text-white border border-white/20 backdrop-blur-md flex items-center justify-center transition-all active:scale-95"
             aria-label="Previous Hero Slide"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-4 h-4" />
           </button>
           <button
             type="button"
             onClick={handleNext}
-            className="w-11 h-11 rounded-xl bg-black/60 hover:bg-black/90 text-white border border-white/20 backdrop-blur-md flex items-center justify-center transition-all active:scale-95"
+            className="w-8 h-8 rounded-lg bg-black/60 hover:bg-black/90 text-white border border-white/20 backdrop-blur-md flex items-center justify-center transition-all active:scale-95"
             aria-label="Next Hero Slide"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </div>

@@ -1,18 +1,22 @@
 // FILE: src/app/page.tsx
 import React from 'react';
 import HeroZSection from '@/components/HeroZSection';
+import DealershipTrustBar from '@/components/DealershipTrustBar';
 import VehicleLineupSection from '@/components/VehicleLineupSection';
 import BranchLocationSection from '@/components/BranchLocationSection';
 import Link from 'next/link';
-import { ArrowRight, PhoneCall, Sparkles, Tag, ShieldCheck, Phone } from 'lucide-react';
+import { ArrowRight, PhoneCall, Sparkles, Tag, Phone } from 'lucide-react';
 
 export default function MitsubishiHomePage() {
   return (
     <div className="flex flex-col">
-      {/* 1. Hero with Strict Z-Pattern guiding eye down the visual diagonal */}
+      {/* 1. Hero with Open, Cinematic Carousel & Floating Typography */}
       <HeroZSection />
 
-      {/* 2. Primary Z-Pattern Bottom Call-to-Action Bridge (Dealership Focused) */}
+      {/* 2. Sleek Trust & Benefits Bar (Keeps Hero completely uncluttered) */}
+      <DealershipTrustBar />
+
+      {/* 3. Primary Call-to-Action Bridge */}
       <section className="bg-red-600 text-white py-6 px-4 sm:px-6 shadow-inner">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-center md:text-left">
