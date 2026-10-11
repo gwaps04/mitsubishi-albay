@@ -48,24 +48,24 @@ export default function MitsubishiFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/salesman/robert-villa" className="hover:text-red-400 text-white font-medium transition-colors flex items-center gap-1.5">
-                  <Award className="w-3.5 h-3.5 text-red-500" />
-                  Robert Villa (Top 1 Salesman)
-                </Link>
-              </li>
-              <li>
                 <Link href="/#vehicles" className="hover:text-red-400 transition-colors">
-                  Explore Models & Promos
+                  Explore Models & Specs
                 </Link>
               </li>
               <li>
-                <Link href="/#agents" className="hover:text-red-400 transition-colors">
-                  Sales Consultants Team
+                <Link href="/#promos" className="hover:text-red-400 transition-colors">
+                  Low Downpayment Promos
                 </Link>
               </li>
               <li>
-                <Link href="/salesman/robert-villa#inquiry" className="hover:text-red-400 transition-colors">
-                  Online Loan Application
+                <Link href="/#branch" className="hover:text-red-400 transition-colors">
+                  Branch Location & Facilities
+                </Link>
+              </li>
+              <li className="pt-1">
+                <Link href="/robert-villa" className="text-neutral-300 hover:text-red-400 transition-colors flex items-center gap-1.5">
+                  <Award className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Robert Villa Personal Portal</span>
                 </Link>
               </li>
             </ul>

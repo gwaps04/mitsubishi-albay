@@ -3,7 +3,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, Phone, Car, Award, MapPin } from 'lucide-react';
+import { Menu, X, Phone, Car, MapPin, Tag, Calendar } from 'lucide-react';
 
 export default function MitsubishiNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -18,10 +18,10 @@ export default function MitsubishiNavbar() {
             <span>Mitsubishi Motors Albay • Bicol Region Authorized Dealership</span>
           </div>
           <div className="flex items-center gap-4 text-neutral-400">
-            <span className="hidden md:inline">Mon - Sat: 8:00 AM - 5:30 PM</span>
+            <span className="hidden md:inline">Showroom: Mon - Sat 8:00 AM - 5:30 PM</span>
             <a href="tel:+63527428888" className="hover:text-white flex items-center gap-1 transition-colors">
               <Phone className="w-3 h-3 text-red-500" />
-              <span>(052) 742-8888 / +63 917 555 4321</span>
+              <span>(052) 742-8888</span>
             </a>
           </div>
         </div>
@@ -29,16 +29,13 @@ export default function MitsubishiNavbar() {
 
       {/* Main Navbar */}
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-        {/* Top-Left: Logo & Brand (Z-pattern Anchor 1) */}
+        {/* Top-Left: Logo & Brand */}
         <Link href="/" className="flex items-center gap-3 group focus:outline-none">
           <div className="relative flex items-center justify-center w-11 h-11 bg-black rounded-xl p-2 shadow-sm group-hover:bg-neutral-800 transition-colors">
             {/* Mitsubishi Three Diamonds stylized vector */}
             <svg viewBox="0 0 100 100" className="w-7 h-7 fill-red-600 drop-shadow-sm">
-              {/* Top diamond */}
               <polygon points="50,5 65,31 50,57 35,31" />
-              {/* Bottom right diamond */}
               <polygon points="65,31 95,31 80,57 50,57" />
-              {/* Bottom left diamond */}
               <polygon points="35,31 5,31 20,57 50,57" />
             </svg>
           </div>
@@ -52,34 +49,33 @@ export default function MitsubishiNavbar() {
           </div>
         </Link>
 
-        {/* Desktop Navigation Links */}
+        {/* Desktop Clean Navigation Links (Dealership Focused) */}
         <div className="hidden lg:flex items-center gap-8 text-sm font-medium text-neutral-700">
           <Link href="/" className="hover:text-red-600 transition-colors py-2">
             Home
           </Link>
-          <Link href="/salesman/robert-villa" className="flex items-center gap-1.5 text-neutral-900 font-semibold hover:text-red-600 transition-colors py-2">
-            <Award className="w-4 h-4 text-red-600" />
-            <span>Robert Villa (Top 1)</span>
-          </Link>
-          <Link href="/#vehicles" className="hover:text-red-600 transition-colors py-2 flex items-center gap-1">
+          <Link href="/#vehicles" className="hover:text-red-600 transition-colors py-2 flex items-center gap-1.5">
             <Car className="w-4 h-4 text-neutral-400" />
             <span>Vehicle Units</span>
           </Link>
-          <Link href="/#agents" className="hover:text-red-600 transition-colors py-2">
-            Sales Team
+          <Link href="/#promos" className="hover:text-red-600 transition-colors py-2 flex items-center gap-1.5">
+            <Tag className="w-4 h-4 text-neutral-400" />
+            <span>Low DP Promos</span>
           </Link>
-          <Link href="/#branch" className="hover:text-red-600 transition-colors py-2">
-            Branch Info
+          <Link href="/#branch" className="hover:text-red-600 transition-colors py-2 flex items-center gap-1.5">
+            <MapPin className="w-4 h-4 text-neutral-400" />
+            <span>Branch & Showroom</span>
           </Link>
         </div>
 
-        {/* Top-Right: Quick CTA Action (Z-pattern Anchor 2) */}
+        {/* Top-Right: Quick CTA Action */}
         <div className="hidden sm:flex items-center gap-3">
           <Link
-            href="/salesman/robert-villa#inquiry"
-            className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-red-600 text-white text-sm font-semibold hover:bg-red-700 active:bg-red-800 transition-all shadow-sm hover:shadow"
+            href="/#vehicles"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 text-white text-sm font-semibold hover:bg-red-700 active:bg-red-800 transition-all shadow-sm hover:shadow"
           >
-            Inquire / Get Quote
+            <Calendar className="w-4 h-4" />
+            <span>Book Test Drive / Quote</span>
           </Link>
         </div>
 
@@ -94,7 +90,7 @@ export default function MitsubishiNavbar() {
         </button>
       </nav>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer (Cleaned of individual salesmen) */}
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-neutral-200 bg-white px-4 pt-3 pb-6 shadow-xl transition-all">
           <div className="flex flex-col gap-2">
@@ -103,18 +99,7 @@ export default function MitsubishiNavbar() {
               onClick={() => setMobileMenuOpen(false)}
               className="px-3 py-2.5 rounded-lg text-neutral-800 hover:bg-neutral-100 font-medium text-base"
             >
-              Home
-            </Link>
-            <Link
-              href="/salesman/robert-villa"
-              onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2.5 rounded-lg bg-red-50 text-red-700 hover:bg-red-100 font-semibold text-base flex items-center justify-between"
-            >
-              <span className="flex items-center gap-2">
-                <Award className="w-5 h-5 text-red-600" />
-                Robert Villa (Top 1 Salesman)
-              </span>
-              <span className="text-xs bg-red-600 text-white px-2 py-0.5 rounded-full font-bold">Top 1</span>
+              Home Showroom
             </Link>
             <Link
               href="/#vehicles"
@@ -125,27 +110,29 @@ export default function MitsubishiNavbar() {
               Available Vehicle Units
             </Link>
             <Link
-              href="/#agents"
+              href="/#promos"
               onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2.5 rounded-lg text-neutral-800 hover:bg-neutral-100 font-medium text-base"
+              className="px-3 py-2.5 rounded-lg text-neutral-800 hover:bg-neutral-100 font-medium text-base flex items-center gap-2"
             >
-              Featured Agents
+              <Tag className="w-5 h-5 text-neutral-500" />
+              Low DP Promos & Financing
             </Link>
             <Link
               href="/#branch"
               onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2.5 rounded-lg text-neutral-800 hover:bg-neutral-100 font-medium text-base"
+              className="px-3 py-2.5 rounded-lg text-neutral-800 hover:bg-neutral-100 font-medium text-base flex items-center gap-2"
             >
+              <MapPin className="w-5 h-5 text-neutral-500" />
               Branch & Dealership Location
             </Link>
 
             <div className="pt-3 mt-2 border-t border-neutral-100 flex flex-col gap-2">
               <Link
-                href="/salesman/robert-villa#inquiry"
+                href="/#vehicles"
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full text-center py-3 rounded-xl bg-red-600 text-white font-semibold text-sm shadow-sm"
               >
-                Inquire With Robert Villa
+                Inquire / Book Test Drive
               </Link>
               <a
                 href="tel:+63527428888"

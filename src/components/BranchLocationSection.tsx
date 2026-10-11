@@ -57,7 +57,7 @@ export default function BranchLocationSection() {
                   <span>Call Dealership: (052) 742-8888</span>
                 </a>
                 <Link
-                  href="/salesman/robert-villa#inquiry"
+                  href="/robert-villa#inquiry"
                   className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-neutral-200 font-medium text-sm border border-neutral-700 transition-colors"
                 >
                   <Calendar className="w-4 h-4 text-red-400" />

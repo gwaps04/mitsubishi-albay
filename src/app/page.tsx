@@ -1,11 +1,10 @@
 // FILE: src/app/page.tsx
 import React from 'react';
 import HeroZSection from '@/components/HeroZSection';
-import FeaturedAgentsSection from '@/components/FeaturedAgentsSection';
 import VehicleLineupSection from '@/components/VehicleLineupSection';
 import BranchLocationSection from '@/components/BranchLocationSection';
 import Link from 'next/link';
-import { Award, ArrowRight, ShieldCheck, PhoneCall, Sparkles } from 'lucide-react';
+import { Award, ArrowRight, PhoneCall, Sparkles } from 'lucide-react';
 
 export default function MitsubishiHomePage() {
   return (
@@ -31,7 +30,7 @@ export default function MitsubishiHomePage() {
           </div>
           <div className="shrink-0">
             <Link
-              href="/salesman/robert-villa"
+              href="/robert-villa"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-red-600 hover:bg-neutral-100 font-bold text-sm shadow-md transition-all active:scale-95"
             >
               <span>Connect with Robert Villa</span>
@@ -41,13 +40,12 @@ export default function MitsubishiHomePage() {
         </div>
       </section>
 
-      {/* 3. Featured Agents Section (Highlighting Robert Villa & Team) */}
-      <FeaturedAgentsSection />
+      {/* 3. Available Vehicle Units Catalog */}
+      <div id="promos" className="scroll-mt-20">
+        <VehicleLineupSection />
+      </div>
 
-      {/* 4. Available Vehicle Units Catalog */}
-      <VehicleLineupSection />
-
-      {/* 5. Dealership & Location Info */}
+      {/* 4. Dealership & Location Info */}
       <BranchLocationSection />
 
       {/* 6. Bottom Inquiry Final Call-to-Action */}
@@ -65,18 +63,18 @@ export default function MitsubishiHomePage() {
           </p>
           <div className="pt-2 flex flex-wrap justify-center items-center gap-4">
             <Link
-              href="/salesman/robert-villa#inquiry"
+              href="/#vehicles"
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold text-sm shadow-lg shadow-red-600/30 transition-all"
             >
               <PhoneCall className="w-4 h-4" />
-              <span>Request Free Quotation Online</span>
+              <span>Browse Vehicle Catalog</span>
             </Link>
             <Link
-              href="/salesman/robert-villa"
+              href="/robert-villa"
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-neutral-200 font-medium text-sm border border-neutral-700 transition-colors"
             >
               <Award className="w-4 h-4 text-amber-400" />
-              <span>View Top 1 Salesman Profile</span>
+              <span>Robert Villa Client Portal</span>
             </Link>
           </div>
         </div>

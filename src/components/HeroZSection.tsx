@@ -60,7 +60,7 @@ export default function HeroZSection() {
             {/* Z-Pattern Diagonal Path to Primary Action */}
             <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <Link
-                href="/salesman/robert-villa"
+                href="/robert-villa"
                 className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-red-600 text-white font-semibold text-base hover:bg-red-700 active:bg-red-800 transition-all shadow-lg shadow-red-600/30 group"
               >
                 <Award className="w-5 h-5 text-amber-300" />

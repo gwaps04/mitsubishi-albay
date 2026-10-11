@@ -124,7 +124,7 @@ export default function VehicleLineupSection() {
           </div>
           <div className="mt-4 md:mt-0">
             <Link
-              href="/salesman/robert-villa"
+              href="/robert-villa"
               className="inline-flex items-center gap-2 text-sm font-semibold text-red-600 hover:text-red-700 transition-colors"
             >
               <span>Get Robert Villa&apos;s custom computation</span>
@@ -194,7 +194,7 @@ export default function VehicleLineupSection() {
                 {/* Card CTA */}
                 <div className="mt-5 pt-3">
                   <Link
-                    href={`/salesman/robert-villa?model=${unit.id}#inquiry`}
+                    href={`/robert-villa?model=${unit.id}#inquiry`}
                     className="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-neutral-900 hover:bg-red-600 text-white text-xs font-semibold transition-colors text-center"
                   >
                     <span>Inquire / Get Quote</span>

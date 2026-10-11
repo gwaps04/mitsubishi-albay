@@ -1,12 +1,53 @@
 // FILE: src/components/RobertVillaBio.tsx
-import React from 'react';
-import { Award, Star, ShieldCheck, CheckCircle2, Phone, Mail, MessageCircle, MapPin, Sparkles } from 'lucide-react';
+'use client';
+
+import React, { useState } from 'react';
+import { Award, Star, ShieldCheck, CheckCircle2, Phone, Mail, MessageCircle, Share2, Check, Sparkles } from 'lucide-react';
 
 export default function RobertVillaBio() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyLink = () => {
+    if (typeof window !== 'undefined') {
+      const shareUrl = `${window.location.origin}/robert-villa`;
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      });
+    }
+  };
+
   return (
     <div className="rounded-3xl bg-neutral-900 border border-neutral-800 text-white p-6 sm:p-10 shadow-2xl relative overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-red-600/15 rounded-full blur-3xl pointer-events-none" />
+
+      {/* Top Client Share Bar */}
+      <div className="mb-8 p-3.5 rounded-2xl bg-black/60 border border-neutral-700/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+        <div className="flex items-center gap-2 text-neutral-300">
+          <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+          <span>
+            <strong>Official Direct Client Portal</strong> • Send this link to family or clients for verified pricing
+          </span>
+        </div>
+        <button
+          type="button"
+          onClick={handleCopyLink}
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-neutral-200 border border-neutral-600 transition-colors font-medium active:scale-95"
+        >
+          {copied ? (
+            <React.Fragment>
+              <Check className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="text-emerald-400 font-semibold">Link Copied! Send via Chat</span>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <Share2 className="w-3.5 h-3.5 text-neutral-300" />
+              <span>Share Robert&apos;s Link</span>
+            </React.Fragment>
+          )}
+        </button>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
         {/* Professional Headshot Placeholder */}
@@ -25,7 +66,7 @@ export default function RobertVillaBio() {
             <div className="absolute -bottom-3 left-4 right-4 bg-black/90 backdrop-blur-md border border-neutral-700 py-2 px-3 rounded-xl flex items-center justify-between shadow-xl">
               <div className="flex items-center gap-1.5 text-amber-400 text-xs font-bold">
                 <Award className="w-4 h-4" />
-                <span>#1 Top Salesman</span>
+                <span>#1 Top Sales Consultant</span>
               </div>
               <span className="text-[11px] font-semibold text-neutral-300">
                 Albay Bicol Branch
@@ -68,7 +109,7 @@ export default function RobertVillaBio() {
           <div className="flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-amber-400 text-black">
               <Star className="w-3.5 h-3.5 fill-black" />
-              Sales Champion of the Year
+              Dealership Sales Champion 2025 - 2026
             </span>
             <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-red-600/30 text-red-400 border border-red-500/30">
               <ShieldCheck className="w-3.5 h-3.5" />
@@ -81,17 +122,17 @@ export default function RobertVillaBio() {
               Robert Villa
             </h1>
             <p className="text-red-400 text-base font-semibold mt-1">
-              Senior Executive Sales Consultant • Mitsubishi Albay Bicol Branch
+              Top 1 Senior Sales Consultant • Mitsubishi Motors Albay Bicol Branch
             </p>
           </div>
 
           {/* Welcoming Bio */}
           <div className="space-y-3 text-neutral-300 text-sm sm:text-base leading-relaxed font-light">
             <p>
-              &ldquo;Welcome to my personal Mitsubishi showroom! For over 8 years, I have had the privilege of helping hundreds of families, entrepreneurs, OFWs, and corporate partners across Albay and the wider Bicol region drive home their dream vehicles.&rdquo;
+              &ldquo;Diyos marhay na aldaw mga ka-Bicolano! Welcome to my personal Mitsubishi showroom. Over the past 8 years, I have helped more than 350+ Bicolano families, OFWs, and local entrepreneurs drive home their brand-new Mitsubishi vehicles.&rdquo;
             </p>
             <p>
-              &ldquo;My philosophy is simple: <strong className="font-semibold text-white">complete transparency, honest computations, and zero hidden charges</strong>. Whether you need an agile Mirage G4, an adventure-ready Xpander Cross, or a rugged 4x4 Triton or Montero Sport, I personally manage your bank applications to secure the highest approval odds and lowest monthly rates possible.&rdquo;
+              &ldquo;My promise to every client is absolute: <strong className="font-semibold text-white">100% transparent computations, honest promos with zero hidden charges, and VIP handling of your bank approval</strong>. Whether you need a Montero Sport, Triton 4x4, Xpander Cross, or Mirage G4, you can message me directly for instant quotes and loan assistance.&rdquo;
             </p>
           </div>
 
@@ -101,31 +142,31 @@ export default function RobertVillaBio() {
               <CheckCircle2 className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
               <div>
                 <p className="text-sm font-bold text-white">350+ Units Released</p>
-                <p className="text-xs text-neutral-400">Serving Legazpi, Daraga, Tabaco, and entire Bicol Region.</p>
+                <p className="text-xs text-neutral-400">Trusted across Legazpi, Daraga, Tabaco, and Bicol region.</p>
               </div>
             </div>
 
             <div className="p-3.5 rounded-xl bg-neutral-800/80 border border-neutral-700 flex items-start gap-2.5">
               <CheckCircle2 className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
               <div>
-                <p className="text-sm font-bold text-white">Fast 24-Hour Approval</p>
-                <p className="text-xs text-neutral-400">Direct partnerships with BDO, BPI, Metrobank, RCBC, and PSBank.</p>
+                <p className="text-sm font-bold text-white">Fast 24-48 Hour Approvals</p>
+                <p className="text-xs text-neutral-400">Direct connections with BDO, BPI, Metrobank, RCBC, and PSBank.</p>
               </div>
             </div>
 
             <div className="p-3.5 rounded-xl bg-neutral-800/80 border border-neutral-700 flex items-start gap-2.5">
               <CheckCircle2 className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
               <div>
-                <p className="text-sm font-bold text-white">Free Door-to-Door Delivery</p>
-                <p className="text-xs text-neutral-400">Free vehicle unit turnover anywhere within Albay province.</p>
+                <p className="text-sm font-bold text-white">Door-to-Door Delivery</p>
+                <p className="text-xs text-neutral-400">Free vehicle turnover ceremony at your residence in Albay.</p>
               </div>
             </div>
 
             <div className="p-3.5 rounded-xl bg-neutral-800/80 border border-neutral-700 flex items-start gap-2.5">
               <CheckCircle2 className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
               <div>
-                <p className="text-sm font-bold text-white">Hassle-Free Trade-In</p>
-                <p className="text-xs text-neutral-400">Highest market appraisal for your existing vehicle trade-in.</p>
+                <p className="text-sm font-bold text-white">Trade-In Appraisal</p>
+                <p className="text-xs text-neutral-400">High trade-in trade-value credit towards your new Mitsubishi.</p>
               </div>
             </div>
           </div>
