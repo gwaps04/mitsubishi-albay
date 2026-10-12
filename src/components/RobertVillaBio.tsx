@@ -25,13 +25,7 @@ export default function RobertVillaBio() {
       <div className="absolute top-0 right-0 w-96 h-96 bg-red-600/15 rounded-full blur-3xl pointer-events-none" />
 
       {/* Top Client Share Bar */}
-      <div className="mb-8 p-3.5 rounded-2xl bg-black/60 border border-neutral-700/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-        <div className="flex items-center gap-2 text-neutral-300">
-          <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
-          <span>
-            <strong>Official Direct Client Portal</strong> • Send this link to family or clients for verified pricing
-          </span>
-        </div>
+      <div className="mb-8 p-3.5 rounded-2xl bg-black/60 border border-neutral-700/80 flex flex-col sm:flex-row items-center justify-end gap-3 text-xs">
         <button
           type="button"
           onClick={handleCopyLink}

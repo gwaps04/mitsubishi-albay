@@ -2,12 +2,20 @@
 /**
  * MITSUBISHI MOTORS ALBAY - VEHICLE & ASSET DIRECTORY
  * 
- * Instructions to swap images:
- * 1. You can put your images in `/public/images/` (e.g. `/images/montero.jpg`) OR use any external CDN URL.
- * 2. Simply replace the `imagePlaceholder` URL in the items below.
- * 3. All image containers are configured with responsive CSS `aspect-ratio` and `object-cover`,
- *    meaning any resolution or aspect ratio (16:9, 4:3, 1:1, 3:2) will automatically render
- *    flawlessly without distortion or layout shifting!
+ * 📍 WHERE TO PLACE VEHICLE ALLOCATION & PROMO IMAGES:
+ * 
+ * You have 2 simple options:
+ * 
+ * OPTION 1: Place files into the `/public/` folder with these filenames:
+ *   - /public/montero.jpg    (Montero Sport Black Series)
+ *   - /public/triton.jpg     (All-New Triton Athlete 4x4)
+ *   - /public/xpander.jpg    (Mitsubishi Xpander Cross)
+ *   - /public/xforce.jpg     (Mitsubishi Xforce SUV)
+ *   - /public/mirage.jpg     (Mirage G4 Sedan)
+ *   - /public/l300.jpg       (Mitsubishi L300 FB Body)
+ * 
+ * OPTION 2: Paste direct online image URLs into `imagePlaceholder` in the list below.
+ * All cards use automatic aspect-ratio containment and fallback guards.
  */
 
 export interface VehicleUnit {
@@ -16,7 +24,8 @@ export interface VehicleUnit {
   variant: string;
   tagline: string;
   category: string;
-  imagePlaceholder: string; // <-- SWAP YOUR IMAGE HERE
+  imagePlaceholder: string; // <-- SWAP YOUR IMAGE HERE (e.g. '/montero.jpg' or CDN URL)
+  fallbackImage: string;
   srp: string;
   promoDP: string;
   monthlyPromo: string;
@@ -34,7 +43,8 @@ export const ALBAY_VEHICLES: VehicleUnit[] = [
     variant: 'Black Series 4x2 AT',
     tagline: 'Refined 7-seater midsize SUV with bold commanding presence and advanced safety',
     category: 'Midsize SUV',
-    imagePlaceholder: 'https://placehold.co/800x500/18181b/ffffff?text=Montero+Sport+Black+Series',
+    imagePlaceholder: '/car1.jpg',
+    fallbackImage: 'https://placehold.co/800x500/18181b/ffffff?text=Montero+Sport+Black+Series',
     srp: '₱2,128,000',
     promoDP: '₱98,000 All-In DP',
     monthlyPromo: '₱38,450 / mo (60 mos)',
@@ -55,7 +65,8 @@ export const ALBAY_VEHICLES: VehicleUnit[] = [
     variant: 'Athlete 4x4 AT',
     tagline: 'Next-gen rally-bred power with 204PS engineered to conquer tough Bicol terrain',
     category: '4x4 Pickup Truck',
-    imagePlaceholder: 'https://placehold.co/800x500/18181b/ffffff?text=All-New+Triton+Athlete+4x4',
+    imagePlaceholder: '/car2.jpg',
+    fallbackImage: 'https://placehold.co/800x500/18181b/ffffff?text=All-New+Triton+Athlete+4x4',
     srp: '₱1,909,000',
     promoDP: '₱85,000 All-In DP',
     monthlyPromo: '₱35,120 / mo (60 mos)',
@@ -76,7 +87,8 @@ export const ALBAY_VEHICLES: VehicleUnit[] = [
     variant: '1.5L AT Two-Tone',
     tagline: 'Philippines #1 family 7-seater crossover MPV with 225mm SUV ground clearance',
     category: '7-Seater Crossover MPV',
-    imagePlaceholder: 'https://placehold.co/800x500/18181b/ffffff?text=Mitsubishi+Xpander+Cross',
+    imagePlaceholder: '/car3.jpg',
+    fallbackImage: 'https://placehold.co/800x500/18181b/ffffff?text=Mitsubishi+Xpander+Cross',
     srp: '₱1,346,000',
     promoDP: '₱48,000 All-In DP',
     monthlyPromo: '₱24,800 / mo (60 mos)',
@@ -97,7 +109,8 @@ export const ALBAY_VEHICLES: VehicleUnit[] = [
     variant: 'Premium 1.5L CVT',
     tagline: 'Dynamic compact 5-seater SUV with Yamaha Dynamic Sound & 4 Drive Modes',
     category: 'Compact SUV',
-    imagePlaceholder: 'https://placehold.co/800x500/18181b/ffffff?text=Mitsubishi+Xforce+SUV',
+    imagePlaceholder: '/car4.jpg',
+    fallbackImage: 'https://placehold.co/800x500/18181b/ffffff?text=Mitsubishi+Xforce+SUV',
     srp: '₱1,581,000',
     promoDP: '₱68,000 All-In DP',
     monthlyPromo: '₱29,350 / mo (60 mos)',
@@ -118,7 +131,8 @@ export const ALBAY_VEHICLES: VehicleUnit[] = [
     variant: 'GLS 1.2L CVT',
     tagline: 'The undisputed fuel-economy champion delivering up to 23 km/L for smart city driving',
     category: 'Subcompact Sedan',
-    imagePlaceholder: 'https://placehold.co/800x500/18181b/ffffff?text=Mirage+G4+GLS+Sedan',
+    imagePlaceholder: '/car5.jpg',
+    fallbackImage: 'https://placehold.co/800x500/18181b/ffffff?text=Mirage+G4+GLS+Sedan',
     srp: '₱899,000',
     promoDP: '₱28,000 All-In DP',
     monthlyPromo: '₱16,420 / mo (60 mos)',
@@ -139,7 +153,8 @@ export const ALBAY_VEHICLES: VehicleUnit[] = [
     variant: 'FB Body Euro 4 Turbo',
     tagline: 'The trusted workhorse and business partner powering Bicol logistics and commerce',
     category: 'Commercial Vehicle',
-    imagePlaceholder: 'https://placehold.co/800x500/18181b/ffffff?text=Mitsubishi+L300+FB+Body',
+    imagePlaceholder: '/car6.jpg',
+    fallbackImage: 'https://placehold.co/800x500/18181b/ffffff?text=Mitsubishi+L300+FB+Body',
     srp: '₱1,010,000',
     promoDP: '₱45,000 All-In DP',
     monthlyPromo: '₱18,950 / mo (60 mos)',

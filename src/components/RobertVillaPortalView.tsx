@@ -13,10 +13,10 @@ export default function RobertVillaPortalView() {
   const [selectedUnit, setSelectedUnit] = useState<string>('Montero Sport Black Series');
 
   return (
-    <div className="bg-neutral-50 min-h-screen py-8 lg:py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-12">
-        {/* Breadcrumb Navigation */}
-        <div className="flex items-center gap-2 text-xs text-neutral-500">
+    <div className="bg-neutral-50 min-h-screen">
+      {/* 1. Breadcrumb Micro-bar */}
+      <div className="bg-white border-b border-neutral-200 py-3 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto flex items-center gap-2 text-xs text-neutral-500">
           <Link href="/" className="hover:text-red-600 transition-colors">
             Home Showroom
           </Link>
@@ -25,21 +25,24 @@ export default function RobertVillaPortalView() {
             Robert Villa (Top 1 Sales Consultant • Albay Branch)
           </span>
         </div>
+      </div>
 
-        {/* 1. Hero Section with Auto-Sliding Carousel of robert-hero1, 2, 3 & Requested Headlines */}
-        <RobertVillaHeroCarousel />
+      {/* 2. Full-Width Responsive Hero Section */}
+      <RobertVillaHeroCarousel />
 
-        {/* 2. Grid of Available Car Units with Placeholders & Computations */}
+      {/* 3. Main Content Container */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 lg:py-16 space-y-14">
+        {/* Available Car Units with Allocation & Promo Computations */}
         <RobertVillaVehicleGrid onSelectUnit={(unitName) => setSelectedUnit(unitName)} />
 
-        {/* 3. Verified Client Testimonials */}
+        {/* Verified Client Testimonials */}
         <RobertVillaTestimonials />
 
-        {/* 4. Personalized Contact & Quotation Inquiry Section */}
+        {/* Personalized Contact & Quotation Inquiry Section */}
         <RobertVillaContactForm selectedUnit={selectedUnit} />
 
         {/* Albay Dealership Assurance Box */}
-        <div className="p-6 rounded-2xl bg-white border border-neutral-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-600">
+        <div className="p-6 rounded-2xl bg-white border border-neutral-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-600 shadow-sm">
           <div className="flex items-center gap-3">
             <div className="p-2.5 rounded-xl bg-red-100 text-red-600 shrink-0">
               <ShieldCheck className="w-5 h-5" />

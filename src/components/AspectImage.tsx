@@ -1,11 +1,12 @@
 // FILE: src/components/AspectImage.tsx
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ImageOff } from 'lucide-react';
 
 interface AspectImageProps {
   src: string;
+  fallbackSrc?: string;
   alt: string;
   aspectClass?: string; // e.g. "aspect-[16/10]", "aspect-[4/3]", "aspect-square", "aspect-[16/9]"
   objectFit?: 'cover' | 'contain';
@@ -17,6 +18,7 @@ interface AspectImageProps {
 
 export default function AspectImage({
   src,
+  fallbackSrc,
   alt,
   aspectClass = 'aspect-[16/10]',
   objectFit = 'cover',
@@ -25,8 +27,22 @@ export default function AspectImage({
   imgClassName = '',
   priority = false,
 }: AspectImageProps) {
+  const [currentSrc, setCurrentSrc] = useState(src);
   const [hasError, setHasError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setCurrentSrc(src);
+    setHasError(false);
+  }, [src]);
+
+  const handleError = () => {
+    if (fallbackSrc && currentSrc !== fallbackSrc) {
+      setCurrentSrc(fallbackSrc);
+    } else {
+      setHasError(true);
+    }
+  };
 
   return (
     <div
@@ -42,12 +58,12 @@ export default function AspectImage({
         </div>
       ) : (
         <img
-          src={src}
+          src={currentSrc}
           alt={alt}
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"
           onLoad={() => setIsLoaded(true)}
-          onError={() => setHasError(true)}
+          onError={handleError}
           className={`w-full h-full ${
             objectFit === 'cover' ? 'object-cover' : 'object-contain'
           } ${objectPosition} transition-all duration-300 ${

@@ -42,6 +42,7 @@ export default function VehicleLineupSection() {
               <div className="relative w-full aspect-[16/10] bg-neutral-900 overflow-hidden">
                 <AspectImage
                   src={unit.imagePlaceholder}
+                  fallbackSrc={unit.fallbackImage}
                   alt={`${unit.name} ${unit.variant}`}
                   aspectClass="aspect-[16/10]"
                   objectFit="cover"
